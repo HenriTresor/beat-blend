@@ -1,4 +1,5 @@
 import React from 'react'
+import SongProvider from './SongProvider'
 
 type Props = {
     children: React.ReactNode
@@ -6,9 +7,9 @@ type Props = {
 
 function AppProvider({ children }: Props) {
     return (
-        <>
+        <SongProvider>
             {children}
-        </>
+        </SongProvider>
     )
 }
 

@@ -4,7 +4,7 @@ import { Song } from '@/types'
 
 
 
-function Song({ name, artist }: Song) {
+function Song({ name }: Song) {
     return (
         <div className='song-container flex items-center p-2 mb-2 mt-2 justify-between cursor-pointer'>
             <div className={`flex items-center gap-4`}>
@@ -12,8 +12,8 @@ function Song({ name, artist }: Song) {
                     BT
                 </div>
                 <div>
-                    <h1 className='font-bold capitalize'>{name}</h1>
-                    <p className='text-neutral-700'>{artist}</p>
+                    <h1 className='font-bold capitalize'>{name.substring(0,40)} ...</h1>
+                    <p className='text-neutral-700'>unknown</p>
                 </div>
             </div>
 

@@ -1,9 +1,6 @@
-export type Song = {
-  name: string;
-  artist: string;
-};
+export interface Song extends File {}
 
 export type SongProviderTypes = {
-  songs: Song[];
+  songs: File[];
   setSongs: (vl: any) => void;
 };

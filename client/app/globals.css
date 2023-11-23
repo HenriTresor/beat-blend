@@ -37,6 +37,10 @@ body {
 }
 
 
+label{
+  @apply cursor-pointer
+}
+
 .gradient-bg{
   background-image: linear-gradient(to bottom, #0e2f01 25%, black 75%);
 }

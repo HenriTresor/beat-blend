@@ -1,13 +1,16 @@
+'use client'
 import { Song, SongProviderTypes } from '@/types'
 import React, { createContext, useState } from 'react'
 
-type Props = {}
+type Props = {
+    children: React.ReactNode
+}
 
 
 
-export const songsContext = createContext<SongProviderTypes | null>(null)
+export const songsContext = createContext<SongProviderTypes>({ songs: [], setSongs: () => { } })
 
-function SongProvider({ }: Props) {
+function SongProvider({ children }: Props) {
 
     const [songs, setSongs] = useState<Song[]>([])
 
@@ -15,7 +18,9 @@ function SongProvider({ }: Props) {
         songs, setSongs
     }
     return (
-        <songsContext.Provider value={value}>SongProvider</songsContext.Provider>
+        <songsContext.Provider value={value}>
+            {children}
+        </songsContext.Provider>
     )
 }
 
