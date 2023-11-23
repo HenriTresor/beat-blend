@@ -26,6 +26,16 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+*::-webkit-scrollbar{
+  width: 5px !important;
+  background: none !important;
+}
+
+*::-webkit-scrollbar-thumb{
+  background: grey !important;
+  border-radius: 50px !important;
+}
+
 
 .gradient-bg{
   background-image: linear-gradient(to bottom, #0e2f01 25%, black 75%);

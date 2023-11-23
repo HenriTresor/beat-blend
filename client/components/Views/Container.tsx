@@ -1,6 +1,7 @@
 import React from 'react'
-import { PlayCircleIcon, PauseCircleIcon, SkipForwardIcon, SkipBackIcon } from 'lucide-react'
+import { PlayCircleIcon, PauseCircleIcon, SkipForwardIcon, SkipBackIcon, PlusCircleIcon } from 'lucide-react'
 import Song from './Song'
+import dayjs from 'dayjs';
 
 type Props = {}
 
@@ -9,8 +10,17 @@ function Container({ }: Props) {
         <div
             className='gradient-bg w-1/3 h-[80%] p-2 shadow-white border-b-2 flex flex-col '
         >
-            <div>
-                Header
+            <div className='w-full p-2 flex justify-between items-center font-bold text-[1.2rem] '>
+                {
+                    dayjs(Date.now()).format('A') === 'AM' ?
+                        <h1>Good Morning</h1>
+                        :
+                        <h1>Good Evening</h1>
+                }
+
+                <button className='action-btn'>
+                    <PlusCircleIcon />
+                </button>
             </div>
             <div className='flex-grow overflow-auto '>
                 {
