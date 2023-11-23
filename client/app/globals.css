@@ -37,3 +37,7 @@ body {
 .action-btn:hover{
   @apply bg-white text-black rounded-full
 }
+
+.song-container:hover{
+  background: rgba(0, 0, 0, 0.144);
+}
