@@ -2,7 +2,7 @@ import { Router } from "express";
 import querystring from 'querystring'
 import crypto from 'crypto'
 import { config } from 'dotenv'
-// import SpotifyWebApiNode from 'spotify-web-api-node'
+import SpotifyWebApiNode from 'spotify-web-api-node'
 import request from "request";
 import { Buffer } from "buffer";
 
@@ -40,7 +40,8 @@ router.get('/callback', async (req, res) => {
             res.status(500).json(err)
             return
         }
-        res.status(200).json(JSON.parse(body))
+        body = JSON.parse(body)
+        res.status(200).json({...body, status:true})
     })
 })
 
