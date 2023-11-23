@@ -23,11 +23,11 @@ function Container({ }: Props) {
                 </button>
             </div>
             <div className='flex-grow overflow-auto '>
-                {
+                {/* {
                     [1, 2, 3, 4, 4, 5, 6, 7, 6].map(song => (
                         <Song name='name' artist='artist' key={song} />
                     ))
-                }
+                } */}
             </div>
             <div className='w-full p-3  bg-[#141414] flex items-center justify-between rounded-md'>
                 <div className='w-1/2'>
