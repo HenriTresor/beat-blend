@@ -1,12 +1,10 @@
 import React from 'react'
 import { MoreVerticalIcon } from 'lucide-react'
+import { Song } from '@/types'
 
-type Props = {
-    name: string;
-    artist: string;
-}
 
-function Song({ name, artist }: Props) {
+
+function Song({ name, artist }: Song) {
     return (
         <div className='song-container flex items-center p-2 mb-2 mt-2 justify-between cursor-pointer'>
             <div className={`flex items-center gap-4`}>
