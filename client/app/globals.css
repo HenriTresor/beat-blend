@@ -30,3 +30,10 @@ body {
 .gradient-bg{
   background-image: linear-gradient(to bottom, #0e2f01 25%, black 75%);
 }
+
+.action-btn{
+  @apply p-1 transition
+}
+.action-btn:hover{
+  @apply bg-white text-black rounded-full
+}

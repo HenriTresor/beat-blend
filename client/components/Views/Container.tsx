@@ -1,4 +1,5 @@
 import React from 'react'
+import {PlayCircleIcon, PauseCircleIcon, SkipForwardIcon, SkipBackIcon} from 'lucide-react'
 
 type Props = {}
 
@@ -13,15 +14,21 @@ function Container({}: Props) {
           <div className='flex-grow '>
               Songs
           </div>
-          <div className='w-full p-1 bg-[#141414] flex items-center justify-between rounded-md'>
-              <div>
-                  <h1>Song name</h1>
-                  <p>Artist</p>
+          <div className='w-full p-3  bg-[#141414] flex items-center justify-between rounded-md'>
+              <div className='w-1/2'>
+                  <h1 className='font-bold capitalize'> Song name</h1>
+                  <p className='text-neutral-700'>Artist</p>
             </div>
-              <div>
-                  <button>prev</button>
-                  <button>play</button>
-                  <button>next</button>
+              <div className='w-1/2 flex justify-evenly'>
+                  <button className='action-btn'>
+                      <SkipBackIcon/>
+                  </button>
+                  <button className='action-btn'>
+                      <PlayCircleIcon />
+                  </button>
+                  <button className='action-btn'>
+                      <SkipForwardIcon />
+                  </button>
             </div>
           </div>
       </div>
