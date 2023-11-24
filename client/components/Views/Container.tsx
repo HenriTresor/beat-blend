@@ -10,6 +10,7 @@ type Props = {}
 function Container({ }: Props) {
     const { songs, setSongs, currentSong, setCurrentSong } = React.useContext(songsContext)
     const audioRef = React.useRef<any>(null)
+    const [isPlaying, setIsPlaying] = React.useState(false)
     const handleSongAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedSongs = e.target.files || [];
         const filteredSongs = [...songs];
@@ -30,6 +31,19 @@ function Container({ }: Props) {
             let songUrl = URL.createObjectURL(currentSong)
             audioRef.current.src = songUrl;
             audioRef.current.play()
+            setIsPlaying(true)
+        }
+    }
+
+    const handlePlayPause = () => {
+        if (isPlaying) {
+            audioRef.current.pause()
+            setIsPlaying(false)
+        } else if (currentSong && !isPlaying) {
+            audioRef.current.play()
+            setIsPlaying(true)
+        } else {
+
         }
     }
 
@@ -85,15 +99,19 @@ function Container({ }: Props) {
             </div>
             <div className='w-full p-3  bg-[#141414] flex items-center justify-between rounded-md'>
                 <div className='w-1/2'>
-                    <h1 className='font-bold capitalize'>{ currentSong?.name.substring(0,40)}...</h1>
+                    <h1 className='font-bold capitalize'>{currentSong?.name.substring(0, 40)}...</h1>
                     <p className='text-neutral-700'>unknown</p>
                 </div>
                 <div className='w-1/2 flex justify-evenly'>
                     <button className='action-btn'>
                         <SkipBackIcon />
                     </button>
-                    <button className='action-btn'>
-                        <PlayCircleIcon />
+                    <button
+                        onClick={handlePlayPause}
+                        className='action-btn'>
+                        {
+                            isPlaying ? <PauseCircleIcon /> : <PlayCircleIcon />
+                        }
                     </button>
                     <button className='action-btn'>
                         <SkipForwardIcon />
