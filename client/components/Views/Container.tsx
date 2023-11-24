@@ -8,7 +8,7 @@ import { songsContext } from '@/providers/SongProvider';
 type Props = {}
 
 function Container({ }: Props) {
-    const { songs, setSongs } = React.useContext(songsContext)
+    const { songs, setSongs, currentSong, setCurrentSong } = React.useContext(songsContext)
     const audioRef = React.useRef<any>(null)
     const handleSongAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedSongs = e.target.files || [];
@@ -23,6 +23,20 @@ function Container({ }: Props) {
         })
 
     }
+
+    const handlePlay = () => {
+        console.log(audioRef.current)
+        if (currentSong) {
+            let songUrl = URL.createObjectURL(currentSong)
+            audioRef.current.src = songUrl;
+            audioRef.current.play()
+        }
+    }
+
+    React.useEffect(() => {
+        handlePlay()
+    }, [currentSong])
+
     return (
         <div
             className='gradient-bg w-1/3 h-[80%] p-2 shadow-white border-b-2 flex flex-col '
@@ -62,15 +76,17 @@ function Container({ }: Props) {
                             }} text={function (): Promise<string> {
                                 throw new Error('Function not implemented.');
                             }}
-                            onClick={() => { }}
+                            onClick={() => {
+                                setCurrentSong(song)
+                            }}
                         />
                     ))
                 }
             </div>
             <div className='w-full p-3  bg-[#141414] flex items-center justify-between rounded-md'>
                 <div className='w-1/2'>
-                    <h1 className='font-bold capitalize'> Song name</h1>
-                    <p className='text-neutral-700'>Artist</p>
+                    <h1 className='font-bold capitalize'>{ currentSong?.name.substring(0,40)}...</h1>
+                    <p className='text-neutral-700'>unknown</p>
                 </div>
                 <div className='w-1/2 flex justify-evenly'>
                     <button className='action-btn'>
