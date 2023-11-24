@@ -8,14 +8,21 @@ type Props = {
 
 
 
-export const songsContext = createContext<SongProviderTypes>({ songs: [], setSongs: () => { } })
+export const songsContext = createContext<SongProviderTypes>({
+    songs: [],
+    setSongs: () => { },
+    currentSong: null,
+    setCurrentSong: () => { }
+})
 
 function SongProvider({ children }: Props) {
 
     const [songs, setSongs] = useState<Song[]>([])
+    const [currentSong, setCurrentSong] = useState(null)
 
     const value = {
-        songs, setSongs
+        songs, setSongs,
+        currentSong, setCurrentSong
     }
     return (
         <songsContext.Provider value={value}>
