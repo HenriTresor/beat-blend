@@ -1,9 +1,10 @@
 'use client'
 import React from 'react'
-import { PlayCircleIcon, PauseCircleIcon, SkipForwardIcon, SkipBackIcon, PlusCircleIcon } from 'lucide-react'
+import { PlayCircleIcon, PauseCircleIcon, SkipForwardIcon, SkipBackIcon, PlusCircleIcon, Shuffle, ShuffleIcon, RepeatIcon, VolumeXIcon, Volume, Volume2Icon, VolumeX } from 'lucide-react'
 import Song from './Song'
 import dayjs from 'dayjs';
 import { songsContext } from '@/providers/SongProvider';
+import { Song as SongType } from '@/types';
 
 type Props = {}
 
@@ -12,6 +13,7 @@ function Container({ }: Props) {
     const [currentSongIndex, setCurrentSongIndex] = React.useState(0)
     const audioRef = React.useRef<any>(null)
     const [isPlaying, setIsPlaying] = React.useState(false)
+    const [mute, setMute] = React.useState(false)
     const handleSongAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedSongs = e.target.files || [];
         const filteredSongs = [...songs];
@@ -21,13 +23,16 @@ function Container({ }: Props) {
         }
 
         setSongs((prev: []) => {
-            return [...filteredSongs]
+            return [...filteredSongs    ]
         })
 
     }
 
     const handlePlay = () => {
-        console.log(audioRef.current)
+
+        if (!currentSong) {
+            setCurrentSong(songs[1])
+        }
         if (currentSong) {
             let songUrl = URL.createObjectURL(currentSong)
             audioRef.current.src = songUrl;
@@ -63,6 +68,17 @@ function Container({ }: Props) {
             })
             setCurrentSongIndex(prev => prev - 1)
         } else return
+    }
+
+    const mutePlayer = () => {
+        if (mute) {
+            audioRef.current.muted = false
+            setMute(prev => !prev)
+        } else {
+            audioRef.current.muted = true
+            setMute(prev => !prev)
+
+        }
     }
 
     React.useEffect(() => {
@@ -121,20 +137,28 @@ function Container({ }: Props) {
                     <h1 className='font-bold capitalize'>{currentSong?.name.substring(0, 40)}...</h1>
                     <p className='text-neutral-700'>unknown</p>
                 </div>
-                <div className='w-1/2 flex justify-evenly'>
-                    <button className='action-btn' onClick={handlePrev}>
-                        <SkipBackIcon />
-                    </button>
-                    <button
-                        onClick={handlePlayPause}
-                        className='action-btn'>
-                        {
-                            isPlaying ? <PauseCircleIcon /> : <PlayCircleIcon />
-                        }
-                    </button>
-                    <button className='action-btn' onClick={handleNext}>
-                        <SkipForwardIcon />
-                    </button>
+                <div className='w-1/2 flex flex-col'>
+                    <div className='w-full flex items-center justify-evenly'>
+                        <button className='action-btn' onClick={handlePrev}>
+                            <SkipBackIcon />
+                        </button>
+                        <button
+                            onClick={handlePlayPause}
+                            className='action-btn'>
+                            {
+                                isPlaying ? <PauseCircleIcon /> : <PlayCircleIcon />
+                            }
+                        </button>
+                        <button className='action-btn' onClick={handleNext}>
+                            <SkipForwardIcon />
+                        </button>
+                    </div>
+                    <div className='w-full flex items-center justify-evenly'>
+
+                        <button className='action-btn' onClick={mutePlayer}>
+                            {mute ? <VolumeX /> : <Volume2Icon />}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
