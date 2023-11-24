@@ -9,6 +9,7 @@ type Props = {}
 
 function Container({ }: Props) {
     const { songs, setSongs, currentSong, setCurrentSong } = React.useContext(songsContext)
+    const [currentSongIndex, setCurrentSongIndex] = React.useState(0)
     const audioRef = React.useRef<any>(null)
     const [isPlaying, setIsPlaying] = React.useState(false)
     const handleSongAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +48,23 @@ function Container({ }: Props) {
         }
     }
 
+    const handleNext = () => {
+        if (currentSong && currentSongIndex !== songs.length - 1) {
+            setCurrentSong((prev: File) => {
+                return songs[currentSongIndex + 1]
+            })
+            setCurrentSongIndex(prev => prev + 1)
+        } else return
+    }
+    const handlePrev = () => {
+        if (currentSong && currentSongIndex !== 0) {
+            setCurrentSong((prev: File) => {
+                return songs[currentSongIndex - 1]
+            })
+            setCurrentSongIndex(prev => prev - 1)
+        } else return
+    }
+
     React.useEffect(() => {
         handlePlay()
     }, [currentSong])
@@ -74,7 +92,7 @@ function Container({ }: Props) {
             </div>
             <div className='flex-grow overflow-auto '>
                 {
-                    songs.map(song => (
+                    songs.map((song, index) => (
                         <Song
                             name={song.name} key={song.name}
                             lastModified={0}
@@ -92,6 +110,7 @@ function Container({ }: Props) {
                             }}
                             onClick={() => {
                                 setCurrentSong(song)
+                                setCurrentSongIndex(index)
                             }}
                         />
                     ))
@@ -103,7 +122,7 @@ function Container({ }: Props) {
                     <p className='text-neutral-700'>unknown</p>
                 </div>
                 <div className='w-1/2 flex justify-evenly'>
-                    <button className='action-btn'>
+                    <button className='action-btn' onClick={handlePrev}>
                         <SkipBackIcon />
                     </button>
                     <button
@@ -113,7 +132,7 @@ function Container({ }: Props) {
                             isPlaying ? <PauseCircleIcon /> : <PlayCircleIcon />
                         }
                     </button>
-                    <button className='action-btn'>
+                    <button className='action-btn' onClick={handleNext}>
                         <SkipForwardIcon />
                     </button>
                 </div>
