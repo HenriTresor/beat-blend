@@ -2,9 +2,11 @@ import React from 'react'
 import { MoreVerticalIcon } from 'lucide-react'
 import { Song } from '@/types'
 
+interface Props extends Song {
+    onClick: (vl: any) => any;
+}
 
-
-function Song({ name }: Song) {
+function SongComponent({ name }: Props) {
     return (
         <div className='song-container flex items-center p-2 mb-2 mt-2 justify-between cursor-pointer'>
             <div className={`flex items-center gap-4`}>
@@ -12,7 +14,7 @@ function Song({ name }: Song) {
                     BT
                 </div>
                 <div>
-                    <h1 className='font-bold capitalize'>{name.substring(0,40)} ...</h1>
+                    <h1 className='font-bold capitalize'>{name.substring(0, 40)} ...</h1>
                     <p className='text-neutral-700'>unknown</p>
                 </div>
             </div>
@@ -24,4 +26,4 @@ function Song({ name }: Song) {
     )
 }
 
-export default Song
+export default SongComponent

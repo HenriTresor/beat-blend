@@ -9,7 +9,7 @@ type Props = {}
 
 function Container({ }: Props) {
     const { songs, setSongs } = React.useContext(songsContext)
-
+    const audioRef = React.useRef<any>(null)
     const handleSongAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedSongs = e.target.files || [];
         const filteredSongs = [...songs];
@@ -27,7 +27,7 @@ function Container({ }: Props) {
         <div
             className='gradient-bg w-1/3 h-[80%] p-2 shadow-white border-b-2 flex flex-col '
         >
-
+            <audio src="" ref={audioRef}></audio>
             <div className='w-full p-2 flex justify-between items-center font-bold text-[1.2rem] '>
                 {
                     dayjs(Date.now()).format('A') === 'AM' ?
@@ -47,15 +47,23 @@ function Container({ }: Props) {
             <div className='flex-grow overflow-auto '>
                 {
                     songs.map(song => (
-                        <Song name={song.name} key={song.name} lastModified={0} webkitRelativePath={''} size={0} type={''} arrayBuffer={function (): Promise<ArrayBuffer> {
-                            throw new Error('Function not implemented.');
-                        }} slice={function (start?: number | undefined, end?: number | undefined, contentType?: string | undefined): Blob {
-                            throw new Error('Function not implemented.');
-                        }} stream={function (): ReadableStream<Uint8Array> {
-                            throw new Error('Function not implemented.');
-                        }} text={function (): Promise<string> {
-                            throw new Error('Function not implemented.');
-                        }} />
+                        <Song
+                            name={song.name} key={song.name}
+                            lastModified={0}
+                            webkitRelativePath={''}
+                            size={0}
+                            type={''}
+                            arrayBuffer={function (): Promise<ArrayBuffer> {
+                                throw new Error('Function not implemented.');
+                            }} slice={function (start?: number | undefined, end?: number | undefined, contentType?: string | undefined): Blob {
+                                throw new Error('Function not implemented.');
+                            }} stream={function (): ReadableStream<Uint8Array> {
+                                throw new Error('Function not implemented.');
+                            }} text={function (): Promise<string> {
+                                throw new Error('Function not implemented.');
+                            }}
+                            onClick={() => { }}
+                        />
                     ))
                 }
             </div>
