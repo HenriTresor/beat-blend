@@ -4,7 +4,6 @@ import { PlayCircleIcon, PauseCircleIcon, SkipForwardIcon, SkipBackIcon, PlusCir
 import Song from './Song'
 import dayjs from 'dayjs';
 import { songsContext } from '@/providers/SongProvider';
-import { Song as SongType } from '@/types';
 
 type Props = {}
 
